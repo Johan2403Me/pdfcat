@@ -1,5 +1,20 @@
 import argparse
+import pathlib
 import glob
+
+def validate_args(output_file, input_files):
+    if pathlib.Path(output_file).suffix != ".pdf":
+        print("error: output file name must end in .pdf")
+        exit(1)
+    elif len(input_files) < 2:
+        print("error: need at least two valid files to merge")
+        exit(1)
+
+    for file in input_files:
+        if pathlib.Path(file).suffix != ".pdf":
+            print("error: input files must be a pdf")
+            exit(1)
+
 
 def parse_args():
     parser = argparse.ArgumentParser()
@@ -9,6 +24,8 @@ def parse_args():
 
     input_files = [file for arg in args.input_files for file in glob.glob(arg)]
     input_files.sort()
+
+    validate_args(args.output_file, input_files)
     
     return args.output_file, input_files
 

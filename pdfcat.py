@@ -28,8 +28,11 @@ def validate_args(output_file, input_files):
         exit(1)
 
     for file in input_files:
-        if pathlib.Path(file).suffix != ".pdf":
-            print("error: input files must be a pdf")
+        if not pathlib.Path(file).is_file():
+            print(f"error: {file}/ is a not a file")
+            exit(1)
+        elif pathlib.Path(file).suffix != ".pdf":
+            print(f"error: {file} is not a PDF")
             exit(1)
 
 

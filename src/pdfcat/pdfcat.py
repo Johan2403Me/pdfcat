@@ -54,6 +54,3 @@ def parse_args():
 def main():
     output_file, input_files = parse_args()
     merge_pdfs(output_file, input_files)
-
-if __name__ == "__main__":
-    main()

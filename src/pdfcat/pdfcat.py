@@ -39,9 +39,13 @@ def validate_args(output_file, input_files):
 
 
 def parse_args():
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(
+        prog="pdfcat",
+        description="A simple tool to merge multiple PDFs at the command line."
+    )
     parser.add_argument("output_file", help="name of final merged PDF file")
     parser.add_argument("input_files", help="list of PDF files to merge", nargs='+')
+    parser.add_argument("-V", "--version", action="version", version="%(prog)s 0.1.0")
     args = parser.parse_args()
 
     input_files = [file for arg in args.input_files for file in glob.glob(arg)]

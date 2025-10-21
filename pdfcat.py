@@ -3,6 +3,7 @@ import pathlib
 import glob
 import sys
 
+from natsort import natsorted
 from pypdf import PdfWriter
 from pypdf.errors import PdfStreamError
 
@@ -44,7 +45,7 @@ def parse_args():
     args = parser.parse_args()
 
     input_files = [file for arg in args.input_files for file in glob.glob(arg)]
-    input_files.sort()
+    input_files = natsorted(input_files)
 
     validate_args(args.output_file, input_files)
     

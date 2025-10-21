@@ -2,6 +2,23 @@ import argparse
 import pathlib
 import glob
 
+from pypdf import PdfWriter
+from pypdf.errors import PdfStreamError
+
+def merge_pdfs(output_file, input_files):
+    merger = PdfWriter()
+
+    for pdf in input_files:
+        try:
+            merger.append(pdf)
+        except PdfStreamError:
+            print(f"error: invalid or corrupted pdf file: {pdf}")
+            merger.close()
+            exit(1)
+
+    merger.write(output_file)
+    merger.close()
+
 def validate_args(output_file, input_files):
     if pathlib.Path(output_file).suffix != ".pdf":
         print("error: output file name must end in .pdf")
@@ -31,6 +48,7 @@ def parse_args():
 
 def main():
     output_file, input_files = parse_args()
+    merge_pdfs(output_file, input_files)
 
     print(f"Output file: {output_file}")
     print(f"Input files: {input_files}")

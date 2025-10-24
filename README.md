@@ -7,6 +7,11 @@ A simple tool built in python to merge multiple PDFs into one at the command lin
 * File globbing support.
 
 ## Installation
+`pdfcat` requires Python 3 (atleast 3.10) and can be installed using `pip`:
+```bash
+pip install git+https://github.com/Johan2403Me/pdfcat.git
+```
 
 ## Usage
-`pdfcat <output_files> <input_files...>`
+Basic usage: `pdfcat <output_files> <input_files...>`  
+For displaying help: `pdfcat --help`
